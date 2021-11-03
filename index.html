@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js"></script>
+    <title>Symulator rozkazów procesora INTEL 8086</title>
+</head>
+
+<body>
+    <main>
+        <header>
+            Symulator rozkazów procesora INTEL 8086
+        </header>
+        <section>
+            <aside id="rejestr">
+                <div class="ax">
+                    <p>AX</p>
+                    <div class="dane">
+                        <span id="hx1">00</span>
+                        <span id="lx1">00</span>
+                    </div>
+
+                    <div class="ax">
+                        <p>BX</p>
+                        <div class="dane">
+                            <span id="hx2">00</span>
+                            <span id="lx2">00</span>
+                        </div>
+                    </div>
+
+                    <div class="ax">
+                        <p>CX</p>
+                        <div class="dane">
+                            <span id="hx3">00</span>
+                            <span id="lx3">00</span>
+                        </div>
+                    </div>
+
+                    <div class="ax">
+                        <p>DX</p>
+                        <div class="dane">
+                            <span id="hx4">00</span>
+                            <span id="lx4">00</span>
+                        </div>
+                    </div>
+                </div>
+            </aside>
+
+            <aside id="high">
+                <div class="wpis">
+                    <p>AH</p>
+                    <input type="text" id="ah1" maxlength="2" oninput="ahGet(1, 'h')">
+                </div>
+
+                <div class="wpis">
+                    <p>BH</p>
+                    <input type="text" id="ah2" maxlength="2" oninput="ahGet(2, 'h')">
+                </div>
+
+                <div class="wpis">
+                    <p>CH</p>
+                    <input type="text" id="ah3" maxlength="2" oninput="ahGet(3, 'h')">
+                </div>
+
+                <div class="wpis">
+                    <p>DH</p>
+                    <input type="text" id="ah4" maxlength="2" oninput="ahGet(4, 'h')">
+                </div>
+            </aside>
+
+            <aside id="low">
+                <div class="wpis">
+                    <p>AL</p>
+                    <input type="text" id="al1" maxlength="2" oninput="ahGet(1, 'l')">
+
+                </div>
+
+                <div class="wpis">
+                    <p>BL</p>
+                    <input type="text" id="al2" maxlength="2" oninput="ahGet(2, 'l')">
+
+                </div>
+
+                <div class="wpis">
+                    <p>CL</p>
+                    <input type="text" id="al3" maxlength="2" oninput="ahGet(3, 'l')">
+
+                </div>
+
+                <div class="wpis">
+                    <p>DL</p>
+                    <input type="text" id="al4" maxlength="2" oninput="ahGet(4, 'l')">
+
+                </div>
+            </aside>
+
+            <aside>
+                <section id="action" style="display:inline-block">
+                    <button class="action" onclick="mov(1)"><b>MOV</b></button>
+                    <button class="action" onclick="mov(2)"><b>XCHG</b></button>
+                    <br><br>
+                    <button class="action2" onclick="reset(1)">zerowanie</button>
+                    <button class="action2" onclick="reset(2)">random</button>
+                </section>
+            </aside>
+        </section>
+        <section id="section2">
+            <aside>
+                <p class="rej">Pierwszy<br>rejestr<br></p>
+                <input type="radio" id="ax1" class="regX" name="regX" value="1x1">
+                <label>AX</label><br>
+                <input type="radio" id="bx1" class="regX" name="regX" value="2x1">
+                <label>BX</label><br>
+                <input type="radio" id="cx1" class="regX" name="regX" value="3x1">
+                <label>CX</label><br>
+                <input type="radio" id="dx1" class="regX" name="regX" value="4x1">
+                <label>DX</label><br>
+            </aside>
+            <aside>
+                <p class="rej">Drugi<br>rejestr<br></p>
+                <input type="radio" id="ax2" class="regX" name="regX2" value="1x2">
+                <label>AX</label><br>
+                <input type="radio" id="bx2" class="regX" name="regX2" value="2x2">
+                <label>BX</label><br>
+                <input type="radio" id="cx2" class="regX" name="regX2" value="3x2">
+                <label>CX</label><br>
+                <input type="radio" id="dx2" class="regX" name="regX2" value="4x2">
+                <label>DX</label><br>
+            </aside>
+            <aside>
+                <p class="rej">
+                <div style="margin-left: 60px;">Pierwszy rejestr<br></div>
+                </p>
+                <input type="radio" id="ah1" class="regX" name="regX" value="1h1">
+                <label>AH</label><br>
+                <input type="radio" id="bh1" class="regX" name="regX" value="2h1">
+                <label>BH</label><br>
+                <input type="radio" id="ch1" class="regX" name="regX" value="3h1">
+                <label>CH</label><br>
+                <input type="radio" id="dh1" class="regX" name="regX" value="4h1">
+                <label>DH</label><br>
+            </aside>
+            <aside style="margin-top: 70px;">
+                <input type="radio" id="al1" class="regX" name="regX" value="1l1">
+                <label>AL</label><br>
+                <input type="radio" id="bl1" class="regX" name="regX" value="2l1">
+                <label>BL</label><br>
+                <input type="radio" id="cl1" class="regX" name="regX" value="3l1">
+                <label>CL</label><br>
+                <input type="radio" id="dl1" class="regX" name="regX" value="4l1">
+                <label>DL</label><br>
+            </aside>
+            </p>
+
+            <aside>
+                <div>
+                    <p class="rej">
+                    <div style="margin-left: 60px;">Drugi<br>rejestr<br></div>
+                    </p>
+                    <input type="radio" id="ah2" class="regX" name="regX2" value="1h2">
+                    <label>AH</label><br>
+                    <input type="radio" id="bh2" class="regX" name="regX2" value="2h2">
+                    <label>BH</label><br>
+                    <input type="radio" id="ch2" class="regX" name="regX2" value="3h2">
+                    <label>CH</label><br>
+                    <input type="radio" id="dh2" class="regX" name="regX2" value="4h2">
+                    <label>DH</label><br>
+            </aside>
+
+            <aside style="margin-top: 70px;">
+                <input type="radio" id="al2" class="regX" name="regX2" value="1l2">
+                <label>AL</label><br>
+                <input type="radio" id="bl2" class="regX" name="regX2" value="2l2">
+                <label>BL</label><br>
+                <input type="radio" id="cl2" class="regX" name="regX2" value="3l2">
+                <label>CL</label><br>
+                <input type="radio" id="dl2" class="regX" name="regX2" value="4l2">
+                <label>DL</label><br>
+            </aside>
+            </p>
+
+        </section>
+    </main>
+</body>
+
+</html>
